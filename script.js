@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainMenu = document.getElementById("main-menu");
     const cardDisplay = document.getElementById("card-display");
     const cardsContainer = document.getElementById("cards");
-    
+
     let cardsData = [];
 
     // Fetch card data from JSON file
@@ -19,19 +19,27 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to draw a random Job card
     function drawJobCard() {
         const jobCards = cardsData.filter(card => card.CardType === "Job");
-        const randomJob = jobCards[Math.floor(Math.random() * jobCards.length)];
-        displayCards([randomJob]);
+        if (jobCards.length > 0) {
+            const randomJob = jobCards[Math.floor(Math.random() * jobCards.length)];
+            displayCards([randomJob]);
+        } else {
+            alert("No Job cards available!");
+        }
     }
 
     // Function to draw 7 random Qualification cards
     function drawQualificationCards() {
         const qualificationCards = cardsData.filter(card => card.CardType === "Qualification");
-        const shuffled = qualificationCards.sort(() => 0.5 - Math.random());
-        const selectedQualifications = shuffled.slice(0, 7);
-        displayCards(selectedQualifications);
+        if (qualificationCards.length >= 7) {
+            const shuffled = qualificationCards.sort(() => 0.5 - Math.random());
+            const selectedQualifications = shuffled.slice(0, 7);
+            displayCards(selectedQualifications);
+        } else {
+            alert("Not enough Qualification cards available!");
+        }
     }
 
-    // Function to display cards
+    // Function to display cards on screen
     function displayCards(cards) {
         mainMenu.style.display = "none";
         cardDisplay.style.display = "block";
@@ -45,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Event listeners
+    // Event listeners for buttons
     drawJobButton.addEventListener("click", drawJobCard);
     drawQualificationButton.addEventListener("click", drawQualificationCards);
     backButton.addEventListener("click", () => {
