@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#main-menu, #card-display {
+    text-align: center;
+}
+
+button {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    margin: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+#draw-job-card, #draw-qualification-cards {
+    background-color: #333;
+    color: #fff;
+}
+
+#back-button {
+    background-color: #555;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.card {
+    font-weight: bold;
+    font-size: 24px;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+}
+
+#cards {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+
+/* Footer styling */
+.credit-message {
+  font-size: 14px;
+  color: #666;
+  margin-top: 20px;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.credit-message a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.credit-message a:hover {
+  text-decoration: underline;
+}
