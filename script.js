@@ -5,50 +5,59 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainMenu = document.getElementById("main-menu");
     const cardDisplay = document.getElementById("card-display");
     const cardsContainer = document.getElementById("cards");
+    const employerCardCount = 70;
+    const meritCardCount = 272;
 
-    let cardsData = [];
+    // Dropdown menu functionality
+    const moreAppsButton = document.getElementById("more-apps-button");
+    const dropdownMenu = document.getElementById("dropdown-menu");
 
-    // Fetch card data from JSON file
-    fetch('cards.json')
-        .then(response => response.json())
-        .then(data => {
-            cardsData = data;
-        })
-        .catch(error => console.error("Error loading card data:", error));
+    moreAppsButton.addEventListener("click", (event) => {
+        dropdownMenu.style.display = (dropdownMenu.style.display === "block") ? "none" : "block";
+        event.stopPropagation();  // Prevent click event from propagating to the body
+    });
+
+    // Close dropdown menu if clicked outside
+    document.addEventListener("click", (event) => {
+        if (!moreAppsButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = "none";
+        }
+    });
 
     // Function to draw a random Job card
     function drawJobCard() {
-        const jobCards = cardsData.filter(card => card.CardType === "Job");
-        if (jobCards.length > 0) {
-            const randomJob = jobCards[Math.floor(Math.random() * jobCards.length)];
-            displayCards([randomJob]);
-        } else {
-            alert("No Job cards available!");
-        }
+        const randomIndex = Math.floor(Math.random() * employerCardCount) + 1;
+        const cardImage = `Individual PNGs/Employer Card (${randomIndex}).png`;
+        displayCards([cardImage]);
     }
 
-    // Function to draw 7 random Qualification cards
+    // Function to draw 7 random Merit cards
     function drawQualificationCards() {
-        const qualificationCards = cardsData.filter(card => card.CardType === "Qualification");
-        if (qualificationCards.length >= 7) {
-            const shuffled = qualificationCards.sort(() => 0.5 - Math.random());
-            const selectedQualifications = shuffled.slice(0, 7);
-            displayCards(selectedQualifications);
-        } else {
-            alert("Not enough Qualification cards available!");
-        }
+        const indices = Array.from({ length: meritCardCount }, (_, i) => i + 1)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 7);
+        const cardImages = indices.map(index => `Individual PNGs/Merit Card (${index}).png`);
+        displayCards(cardImages);
     }
 
     // Function to display cards on screen
-    function displayCards(cards) {
+    function displayCards(cardImages) {
         mainMenu.style.display = "none";
         cardDisplay.style.display = "block";
         cardsContainer.innerHTML = ""; // Clear previous cards
-
-        cards.forEach(card => {
-            const cardElement = document.createElement("div");
+        cardImages.forEach(cardImage => {
+            const cardElement = document.createElement("img");
             cardElement.classList.add("card");
-            cardElement.textContent = card.Card;
+            cardElement.src = cardImage;
+            cardElement.alt = "Card Image";
+            // Add click event for fullscreen toggle
+            cardElement.addEventListener("click", () => {
+                if (cardElement.classList.contains("fullscreen")) {
+                    cardElement.classList.remove("fullscreen");
+                } else {
+                    cardElement.classList.add("fullscreen");
+                }
+            });
             cardsContainer.appendChild(cardElement);
         });
     }
