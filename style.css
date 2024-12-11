@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f9fc;
+    background-color: #131313;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,40 +16,116 @@ body {
     color: #333;
 }
 
-#main-menu, #card-display {
-    text-align: center;
-    padding: 20px;
-    max-width: 600px;
+#header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1px 20px;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+#kay-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+#kay-logo:hover {
+    text-decoration: underline;
 }
 
 .menu-button {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 15px 30px;
     margin: 15px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     color: white;
-    background-color: #4a90e2;
+    background-color: #333;
     transition: background-color 0.3s;
 }
 
-.menu-button:hover {
-    background-color: #357ABD;
+#draw-job-card {
+    background-color: #0068e1;
+}
+
+#draw-job-card:hover {
+    background-color: #307ed9;
+}
+
+#draw-qualification-cards {
+    background-color: #1E8655;
+}
+
+#draw-qualification-cards:hover {
+    background-color: #388E3C;
+}
+
+/* Specific styling for the "More Apps" button to keep the same style as other buttons */
+#more-apps-button {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+#more-apps-button:hover {
+    background-color: #555;
+}
+
+#dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+#dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+#dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+#main-menu, #card-display {
+    text-align: center;
+    padding: 20px;
+    max-width: 1000px;
 }
 
 .card {
-    font-weight: bold;
-    font-size: 24px;
-    background-color: #fff;
-    color: #333;
-    border-radius: 6px;
-    padding: 20px;
-    margin: 10px;
+    border-radius: 14px;
+    padding: 4px;
+    margin: 2px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     display: inline-block;
-    min-width: 150px;
+    min-width: 250px;
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card.fullscreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+    z-index: 1000;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #cards {
@@ -66,4 +142,14 @@ footer {
     font-size: 0.9rem;
     color: #555;
     text-align: center;
+}
+
+.footer-link {
+    color: rgb(240, 157, 5);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+    color: rgb(197, 96, 2);
 }
